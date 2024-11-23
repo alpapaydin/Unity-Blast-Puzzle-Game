@@ -329,6 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thudClip: {fileID: 8300000, guid: a0cbe8e025e30524c9f39f47894fbaa5, type: 3}
   loseClip: {fileID: 8300000, guid: d523396a47e6aaf4c929faafceefb324, type: 3}
+  tapClip: {fileID: 8300000, guid: db2835a8e8fb22c46b709909cb064dee, type: 3}
 --- !u!1 &2667472144104917542
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,13 +5,24 @@ using UnityEngine;
 
 public class MainScene : MonoBehaviour
 {
+    [SerializeField] private AudioClip bgmClip;
+    [SerializeField] private AudioClip tapClip;
     [SerializeField] private TextMeshProUGUI m_TextMeshPro;
     [SerializeField] private FolderReference levelsFolder;
     [SerializeField] private int debugLevel = 1;
     private LevelData levelData;
-
+    private AudioSource bgmPlayer;
+    private AudioSource sfxPlayer;
     void Start()
     {
+        if (bgmPlayer == null)
+        {
+            sfxPlayer = gameObject.AddComponent<AudioSource>();
+            bgmPlayer = gameObject.AddComponent<AudioSource>();
+            bgmPlayer.loop = true;
+            bgmPlayer.clip = bgmClip;
+            bgmPlayer.Play();
+        }
         if (debugLevel > 0) { GameManager.Instance.SetCurrentLevel(debugLevel); }
         levelData = LoadLevelData(GameManager.Instance.CurrentLevel);
         UpdateLevelText();
@@ -36,6 +47,7 @@ public class MainScene : MonoBehaviour
 
     public void OnLevelButtonClicked()
     {
+        sfxPlayer.PlayOneShot(tapClip);
         if (levelData != null)
         {
             GameManager.Instance.CurrentLevelData = levelData;

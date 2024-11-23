@@ -255,6 +255,7 @@ MonoBehaviour:
   blastClip: {fileID: 8300000, guid: ae7b2957847c42a41b135b85cfe2a206, type: 3}
   tntCreateClip: {fileID: 8300000, guid: 5728ee7f6659b0d4d993b53ece3ffd1e, type: 3}
   tntExplodeClip: {fileID: 8300000, guid: 538a56f942cdbe040964db63229acf0d, type: 3}
+  bgmClip: {fileID: 8300000, guid: d603e87d17ea5da4389f5ed17f069ed9, type: 3}
 --- !u!4 &250106120
 Transform:
   m_ObjectHideFlags: 0

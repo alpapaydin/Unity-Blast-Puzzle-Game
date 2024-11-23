@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 618209910}
   - component: {fileID: 618209909}
   m_Layer: 0
-  m_Name: MainScene
+  m_Name: MainScene (Adjust current level here)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,6 +504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64fea698965f7d46b19578a16fa6a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmClip: {fileID: 8300000, guid: e6bf9ad1b29a91a40a32f3576724aa4d, type: 3}
+  tapClip: {fileID: 8300000, guid: db2835a8e8fb22c46b709909cb064dee, type: 3}
   m_TextMeshPro: {fileID: 1882526009}
   levelsFolder:
     name: 

@@ -27,8 +27,10 @@ public class LevelScene : MonoBehaviour
     [SerializeField] private AudioClip blastClip;
     [SerializeField] private AudioClip tntCreateClip;
     [SerializeField] private AudioClip tntExplodeClip;
+    [SerializeField] private AudioClip bgmClip;
 
     private AudioSource audioSource;
+    private AudioSource bgmPlayer;
     private LevelData currentLevelData;
     private int currentLevel;
     private int remainingMoves;
@@ -45,6 +47,13 @@ public class LevelScene : MonoBehaviour
 
     private void Awake()
     {
+        if (bgmPlayer == null)
+        {
+            bgmPlayer = gameObject.AddComponent<AudioSource>();
+            bgmPlayer.loop = true;
+            bgmPlayer.clip = bgmClip;
+            bgmPlayer.Play();
+        }
         audioSource = gameObject.AddComponent<AudioSource>();
         mainCamera = Camera.main;
         gridController.OnBlast += PlayBlastSound;
