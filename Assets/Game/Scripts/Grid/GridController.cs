@@ -143,11 +143,15 @@ public class GridController : MonoBehaviour
         }
         else if (tappedItem is TNT tnt)
         {
-            OnTntExploded?.Invoke();
             tnt.TakeDamage(DamageType.TNT);
             return true;
         }
         return false;
+    }
+
+    public void TntExploded()
+    {
+        OnTntExploded?.Invoke();
     }
 
     public void SpawnTNT(Vector2Int position)

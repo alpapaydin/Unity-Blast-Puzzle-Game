@@ -255,6 +255,7 @@ public class LevelScene : MonoBehaviour
                     gridController.SetGridPosition(move.from.x, move.from.y, null);
                     gridController.MoveItemToPosition(move.item, move.to.x, move.to.y, true);
                 }
+                StartCoroutine(UpdateTNTStatesWhileFalling());
                 yield return new WaitForSeconds(gridController.FallDelay);
                 while (gridController.AreItemsMoving())
                 {
@@ -282,6 +283,16 @@ public class LevelScene : MonoBehaviour
             OnLevelFailed();
         }
         canInteract = true;
+    }
+
+    private IEnumerator UpdateTNTStatesWhileFalling()
+    {
+        float updateInterval = 0.05f;
+        while (gridController.AreItemsMoving())
+        {
+            gridController.UpdateAllCubeStates();
+            yield return new WaitForSeconds(updateInterval);
+        }
     }
 
     private void SpawnNewRow()
