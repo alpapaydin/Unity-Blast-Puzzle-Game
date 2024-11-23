@@ -1,0 +1,7 @@
+{
+       "level_number": 5,
+       "grid_width": 9,
+       "grid_height": 9,
+       "move_count": 12,
+       "grid": ["rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "t", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "t", "bo", "t", "rand", "rand", "rand", "rand", "rand", "t", "bo", "bo", "bo", "t", "rand", "rand", "rand", "t", "bo", "bo", "bo", "bo", "bo", "t", "rand", "rand", "rand", "t", "bo", "bo", "bo", "t", "rand", "rand", "rand", "rand", "rand", "t", "bo", "t", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "t", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand", "rand"]
+}

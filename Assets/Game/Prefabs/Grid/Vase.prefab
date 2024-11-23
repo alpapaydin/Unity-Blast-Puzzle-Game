@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7533577058827973094
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695411551215956885, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512813815134086773, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_Name
+      value: Vase
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669416609000105305, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eef5d6d3875371f4a96542a8b07d24de, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4512813815134086773, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3313551575506933510}
+  m_SourcePrefab: {fileID: 100100000, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+--- !u!212 &2900808271910376639 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4669416609000105305, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+  m_PrefabInstance: {fileID: 7533577058827973094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6209364558594955155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4512813815134086773, guid: e4eb04dfa5d3f754db959cd862b519ce, type: 3}
+  m_PrefabInstance: {fileID: 7533577058827973094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3313551575506933510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209364558594955155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821d3209789c33843b7c24ab9f69aee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 2900808271910376639}
+  particlePrefab: {fileID: 2483730958915903862, guid: b1707e0cf89e8bd438d7739e18f8974b, type: 3}
+  explosionPrefab: {fileID: 4042545278347430952, guid: d600bfa5898e9b54d8cafbe2a75ac017, type: 3}
+  isMoving: 0
+  obstacleType: v
+  damageOverlay: {fileID: 0}
+  destroyParticles: {fileID: 4080931946653633305, guid: b1707e0cf89e8bd438d7739e18f8974b, type: 3}
+  normalSprite: {fileID: 21300000, guid: eef5d6d3875371f4a96542a8b07d24de, type: 3}
+  damagedSprite: {fileID: 21300000, guid: 3762ebf3a8020c844be719949993e4fa, type: 3}
