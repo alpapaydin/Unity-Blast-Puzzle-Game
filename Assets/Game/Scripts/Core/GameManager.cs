@@ -37,4 +37,10 @@ public class GameManager : MonoBehaviour
         CurrentLevel = level;
         SaveGame();
     }
+
+    public void IncreaseCurrentLevel(int by)
+    {
+        CurrentLevel += by;
+        SaveGame();
+    }
 }

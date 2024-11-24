@@ -245,7 +245,7 @@ MonoBehaviour:
   winPopupDelay: 4
   particleSystemPrefab: {fileID: 0}
   backgroundPadding: {x: 0.15, y: 0.18}
-  debugLevel: 2
+  debugLevel: -1
   cubePrefab: {fileID: 454564725518091029, guid: cea09ba42f6088b488d942c12378cc50, type: 3}
   boxPrefab: {fileID: 8696959108205709970, guid: a4db65377b8c67f40a3d7d4b7d0df955, type: 3}
   stonePrefab: {fileID: 4704222410012222061, guid: 95b9cb50b4fb1ed4cb57d9e7e4604148, type: 3}

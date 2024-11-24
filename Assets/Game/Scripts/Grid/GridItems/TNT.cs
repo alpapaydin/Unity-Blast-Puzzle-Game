@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using System.Linq;
+using TMPro;
 
 public class TNT : GridItem
 {
+    [SerializeField] GameObject comboFeedbackPrefab;
     private bool isExploding = false;
     private static HashSet<GridItem> explodingTNTs = new HashSet<GridItem>();
     private static int activeExplosionChains = 0;
@@ -12,6 +15,9 @@ public class TNT : GridItem
     private const float TRIGGER_ANIMATION_DURATION = 0.2f;
     private const int TRIGGER_ANIMATION_LOOPS = 2;
     private Vector3 originalScale;
+    private bool isInitialTNT = false;
+    private bool isPartOfCombo = false;
+    private List<TNT> chainedTNTs = new List<TNT>();
 
     public override bool CanFall() => true;
 
@@ -26,19 +32,40 @@ public class TNT : GridItem
         if (isExploding) return;
         isExploding = true;
         explodingTNTs.Add(this);
-        activeExplosionChains++;
-        var adjacentTNTs = GetAdjacentTNTs();
-        foreach (var tnt in adjacentTNTs)
+        if (explodingTNTs.Count == 1)
         {
-            if (!explodingTNTs.Contains(tnt))
+            isInitialTNT = true;
+            activeExplosionChains++;
+            var adjacentTNTs = GetAdjacentTNTs();
+            chainedTNTs.AddRange(adjacentTNTs);
+            if (chainedTNTs.Count >= 1) {SpawnComboFeedback(chainedTNTs.Count + 1);}
+            foreach (var tnt in adjacentTNTs)
             {
-                tnt.TakeDamage(damageType);
+                if (!explodingTNTs.Contains(tnt))
+                {
+                    tnt.MarkAsComboTNT();
+                    tnt.TakeDamage(damageType);
+                }
             }
+            StartCoroutine(TriggerAndExplodeSequence(damageType));
         }
-        StartCoroutine(TriggerAndExplodeSequence(damageType));
+        else if (!isPartOfCombo)
+        {
+            activeExplosionChains++;
+            StartCoroutine(TriggerAndExplodeSequence(damageType));
+        }
+        else
+        {
+            StartCoroutine(TriggerAnimation());
+        }
     }
 
-    private IEnumerator TriggerAndExplodeSequence(DamageType damageType)
+    private void MarkAsComboTNT()
+    {
+        isPartOfCombo = true;
+    }
+
+    private IEnumerator TriggerAnimation()
     {
         for (int loop = 0; loop < TRIGGER_ANIMATION_LOOPS; loop++)
         {
@@ -61,32 +88,58 @@ public class TNT : GridItem
                 yield return null;
             }
         }
+    }
+
+    private IEnumerator TriggerAndExplodeSequence(DamageType damageType)
+    {
+        yield return StartCoroutine(TriggerAnimation());
         float remainingDelay = EXPLOSION_DELAY - (TRIGGER_ANIMATION_DURATION * TRIGGER_ANIMATION_LOOPS);
         if (remainingDelay > 0)
         {
             yield return new WaitForSeconds(remainingDelay);
         }
-        if (GetAdjacentTNTs().Count > 0)
+        if (isInitialTNT && chainedTNTs.Count > 0)
         {
             explosionScale = 8f;
             Explode(DamageType.TNTCombo);
+            foreach (var tnt in chainedTNTs)
+            {
+                gridController.SetGridPosition(tnt.GridPosition.x, tnt.GridPosition.y, null);
+                tnt.SpawnDestroyParticles();
+                explodingTNTs.Remove(tnt);
+                Destroy(tnt.gameObject);
+            }
         }
-        else
+        else if (!isPartOfCombo)
         {
             explosionScale = 5f;
             Explode(DamageType.TNT);
         }
-        gridController.TntExploded();
-        gridController.SetGridPosition(GridPosition.x, GridPosition.y, null);
-        explodingTNTs.Remove(this);
-        SpawnDestroyParticles();
-        activeExplosionChains--;
-        if (activeExplosionChains <= 0)
+        if (!isPartOfCombo)
         {
-            activeExplosionChains = 0;
-            LevelScene.TriggerGridUpdate();
+            gridController.TntExploded();
+            gridController.SetGridPosition(GridPosition.x, GridPosition.y, null);
+            explodingTNTs.Remove(this);
+            SpawnDestroyParticles();
+            activeExplosionChains--;
+            if (activeExplosionChains <= 0)
+            {
+                activeExplosionChains = 0;
+                LevelScene.TriggerGridUpdate();
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+    }
+
+    private void SpawnComboFeedback(int count)
+    {
+        if (comboFeedbackPrefab == null) return;
+        GameObject feedbackObj = Instantiate(comboFeedbackPrefab, transform.position, Quaternion.identity);
+        TMPro.TextMeshPro tmpText = feedbackObj.GetComponent<TMPro.TextMeshPro>();
+        if (tmpText != null)
+        {
+            tmpText.text = $"x{count} Combo!";
+        }
     }
 
     private List<TNT> GetAdjacentTNTs()
@@ -127,7 +180,14 @@ public class TNT : GridItem
                 GridItem targetItem = gridController.GetGridItem(targetPos.x, targetPos.y);
                 if (targetItem != null && targetItem != this && !explodingTNTs.Contains(targetItem))
                 {
-                    itemsToDamage.Add((targetItem, targetPos));
+                    if (targetItem is TNT && !chainedTNTs.Contains(targetItem))
+                    {
+                        targetItem.TakeDamage(DamageType.TNT);
+                    }
+                    else if (!(targetItem is TNT && chainedTNTs.Contains(targetItem)))
+                    {
+                        itemsToDamage.Add((targetItem, targetPos));
+                    }
                 }
             }
         }

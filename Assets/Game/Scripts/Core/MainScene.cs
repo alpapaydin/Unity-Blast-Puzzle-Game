@@ -8,8 +8,8 @@ public class MainScene : MonoBehaviour
     [SerializeField] private AudioClip bgmClip;
     [SerializeField] private AudioClip tapClip;
     [SerializeField] private TextMeshProUGUI m_TextMeshPro;
-    [SerializeField] private FolderReference levelsFolder;
-    [SerializeField] private int debugLevel = 1;
+    [SerializeField] private TextAsset[] levelFiles;
+    [SerializeField] private int debugLevel = 0;
     private LevelData levelData;
     private AudioSource bgmPlayer;
     private AudioSource sfxPlayer;
@@ -23,7 +23,9 @@ public class MainScene : MonoBehaviour
             bgmPlayer.clip = bgmClip;
             bgmPlayer.Play();
         }
+        #if UNITY_EDITOR
         if (debugLevel > 0) { GameManager.Instance.SetCurrentLevel(debugLevel); }
+        #endif
         levelData = LoadLevelData(GameManager.Instance.CurrentLevel);
         UpdateLevelText();
     }
@@ -35,12 +37,9 @@ public class MainScene : MonoBehaviour
 
     private LevelData LoadLevelData(int levelNumber)
     {
-        string formattedNumber = levelNumber.ToString("D2");
-        string path = Path.Combine(levelsFolder.Path, $"level_{formattedNumber}.json");
-        if (File.Exists(path))
+        if (levelNumber >= 0 && levelNumber < levelFiles.Length)
         {
-            string jsonContent = File.ReadAllText(path);
-            return JsonUtility.FromJson<LevelData>(jsonContent);
+            return JsonUtility.FromJson<LevelData>(levelFiles[levelNumber].text);
         }
         return null;
     }

@@ -32,7 +32,6 @@ public class LevelScene : MonoBehaviour
     private AudioSource audioSource;
     private AudioSource bgmPlayer;
     private LevelData currentLevelData;
-    private int currentLevel;
     private int remainingMoves;
     private bool canInteract = true;
     private bool isGameOver = false;
@@ -106,7 +105,6 @@ public class LevelScene : MonoBehaviour
         {
             string jsonContent = File.ReadAllText(path);
             currentLevelData = JsonUtility.FromJson<LevelData>(jsonContent);
-            currentLevel = debugLevel;
             remainingMoves = currentLevelData.move_count;
 
             InitializeGridAndItems();
@@ -120,7 +118,6 @@ public class LevelScene : MonoBehaviour
     private void InitializeLevel()
     {
         currentLevelData = GameManager.Instance.CurrentLevelData;
-        currentLevel = currentLevelData.level_number;
         remainingMoves = currentLevelData.move_count;
         InitializeGridAndItems();
     }
@@ -313,7 +310,7 @@ public class LevelScene : MonoBehaviour
     public void OnObstacleDestroyed(string obstacleType)
     {
         levelUI.UpdateObstacleCount(obstacleType);
-        if (levelUI.AreAllGoalsComplete())
+        if (levelUI.AreAllGoalsComplete() && !isGameOver)
         {
             OnLevelComplete();
         }
@@ -332,6 +329,7 @@ public class LevelScene : MonoBehaviour
     private void OnLevelComplete()
     {
         isGameOver = true;
+        GameManager.Instance.IncreaseCurrentLevel(1);
         GameObject popup = Instantiate(winPopupPrefab, levelUI.transform);
         StartCoroutine(HandleWinSequence());
     }
@@ -339,7 +337,6 @@ public class LevelScene : MonoBehaviour
     private IEnumerator HandleWinSequence()
     {
         yield return new WaitForSeconds(winPopupDelay);
-        GameManager.Instance.SetCurrentLevel(currentLevel + 1);
         SceneManager.LoadScene("MainScene");
     }
 

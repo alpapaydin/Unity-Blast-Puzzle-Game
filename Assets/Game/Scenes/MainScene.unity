@@ -507,10 +507,18 @@ MonoBehaviour:
   bgmClip: {fileID: 8300000, guid: e6bf9ad1b29a91a40a32f3576724aa4d, type: 3}
   tapClip: {fileID: 8300000, guid: db2835a8e8fb22c46b709909cb064dee, type: 3}
   m_TextMeshPro: {fileID: 1882526009}
-  levelsFolder:
-    name: 
-    GUID: 9809a397f274e564fbba98860caa6174
-  debugLevel: 4
+  levelFiles:
+  - {fileID: 4900000, guid: e54ecf89c4fc2df48b8655ec4d12bced, type: 3}
+  - {fileID: 4900000, guid: f95f26710f8429f4d9013a5da0c5c224, type: 3}
+  - {fileID: 4900000, guid: 604261d606c78244fa5ba392f63a93cc, type: 3}
+  - {fileID: 4900000, guid: 1d85a73d630445b489a7ff412cc9915b, type: 3}
+  - {fileID: 4900000, guid: 61c3192fabc955a49bbb18bc525b2b60, type: 3}
+  - {fileID: 4900000, guid: 069dee411c6e6ed498e22728e8af0166, type: 3}
+  - {fileID: 4900000, guid: 96f9f84de152c3a4bbe69498c390a734, type: 3}
+  - {fileID: 4900000, guid: 6bc036f8658d7d34db885cce94cdbd26, type: 3}
+  - {fileID: 4900000, guid: e1339773a890f9e40a598a30a2ad080f, type: 3}
+  - {fileID: 4900000, guid: bf24b817c4bcc6042bd4399a2ac460f2, type: 3}
+  debugLevel: 0
 --- !u!4 &618209910
 Transform:
   m_ObjectHideFlags: 0

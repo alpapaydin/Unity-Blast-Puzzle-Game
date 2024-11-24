@@ -90,7 +90,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4042545278347430952, guid: c8c8e509f65de4f4bac32bd29fb67144, type: 3}
   explosionScale: 0.5
   isMoving: 0
-  chainReactionDelay: 0.5
+  comboFeedbackPrefab: {fileID: 2376567644148521832, guid: adb8ba6eb12d4df4bb55e600fe12d37f, type: 3}
 --- !u!212 &9166564096112120338 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7780800189077306900, guid: 9817b663f7690f743b5531d803f7237a, type: 3}
