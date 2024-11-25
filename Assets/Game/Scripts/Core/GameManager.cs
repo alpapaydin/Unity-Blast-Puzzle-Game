@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
-        CurrentLevel = PlayerPrefs.GetInt(SAVE_KEY, 1);
+        CurrentLevel = PlayerPrefs.GetInt(SAVE_KEY, 0);
     }
 
     public void SaveGame()

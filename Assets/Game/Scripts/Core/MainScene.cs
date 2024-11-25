@@ -1,5 +1,3 @@
-using EditorUtils;
-using System.IO;
 using TMPro;
 using UnityEngine;
 
@@ -24,7 +22,7 @@ public class MainScene : MonoBehaviour
             bgmPlayer.Play();
         }
         #if UNITY_EDITOR
-        if (debugLevel > 0) { GameManager.Instance.SetCurrentLevel(debugLevel); }
+        if (debugLevel > 0) { GameManager.Instance.SetCurrentLevel(debugLevel - 1); }
         #endif
         levelData = LoadLevelData(GameManager.Instance.CurrentLevel);
         UpdateLevelText();
@@ -32,7 +30,7 @@ public class MainScene : MonoBehaviour
 
     private void UpdateLevelText()
     {
-        m_TextMeshPro.text = levelData != null ? $"Level {GameManager.Instance.CurrentLevel}" : "Finished";
+        m_TextMeshPro.text = levelData != null ? $"Level {GameManager.Instance.CurrentLevel + 1}" : "Finished";
     }
 
     private LevelData LoadLevelData(int levelNumber)
