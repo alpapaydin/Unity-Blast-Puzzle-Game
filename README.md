@@ -1,4 +1,4 @@
-# Dream Match - Unity Puzzle Game
+# BoomBlast - Unity Puzzle Game
 
 A level-based mobile puzzle game created with Unity 2022.3.8, featuring match-3 mechanics with special items and obstacles.
 
